@@ -1,24 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import AppStyles from './App.module.scss';
+import Card from './components/Card/Card';
+import AddUser from './components/Users/AddUser';
 
 function App() {
+  const [name, setName] = useState<string>('');
+  const [age, setAge] = useState<string>('');
+  const [users, setUsers] = useState<Array<any>>([]);
+
+  console.log('Users: ', users);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={AppStyles.App}>
+      <AddUser
+        name={name}
+        age={age}
+        users={users}
+        setName={setName}
+        setAge={setAge}
+        setUsers={setUsers}
+      />
+      {users && users.map((user, idx) => <Card key={idx} user={user} />)}
     </div>
   );
 }
