@@ -2,20 +2,16 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import App from '../../App';
 
 describe('User Test Cases', () => {
-  it('Successful user submission', async () => {
+  it('Initial Conditions', () => {
     render(<App />);
     const addUserButton = screen.getByRole('button', {
       name: /add user/i,
     });
+    expect(addUserButton).toBeInTheDocument();
     const nameInput = screen.getByRole('textbox', { name: /name/i });
+    expect(nameInput).toBeInTheDocument();
     const ageInput = screen.getByRole('spinbutton', { name: /age/i });
-
-    fireEvent.change(nameInput, { target: { value: 'something' } });
-    fireEvent.change(ageInput, { target: { value: '1' } });
-    fireEvent.click(addUserButton);
-
-    const users = await screen.findAllByText(/something/i);
-    expect(users).toHaveLength(1);
+    expect(ageInput).toBeInTheDocument();
   });
 
   it('Input fields are empty after successful user submission', async () => {

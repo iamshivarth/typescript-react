@@ -1,17 +1,13 @@
 import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
-import App from '../../App';
+import Button from './Button';
 
 describe('Button Test Cases', () => {
-  it('Initial Conditions', () => {
-    render(<App />);
-    const addUserButton = screen.getByRole('button', {
-      name: /add user/i,
+  it('Correct Button Name', () => {
+    render(<Button>Add</Button>);
+    const addButton = screen.getByRole('button', {
+      name: /add/i,
     });
-    expect(addUserButton).toBeInTheDocument();
-    const nameInput = screen.getByRole('textbox', { name: /name/i });
-    expect(nameInput).toBeInTheDocument();
-    const ageInput = screen.getByRole('spinbutton', { name: /age/i });
-    expect(ageInput).toBeInTheDocument();
+    expect(addButton.textContent).toBe('Add');
   });
 });
